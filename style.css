@@ -1,0 +1,24 @@
+#app {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.inventory-container,
+.cart-container {
+    flex: 1;
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.checkout-btn {
+    background-color: black;
+    color: white;
+    width: 100%;
+    border-radius: 5px;
+    height: 30px;
+}
