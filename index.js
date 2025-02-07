@@ -248,7 +248,6 @@ const Controller = ((model, view) => {
 
   const handleCheckout = () => {
     console.log('Checkout process initiated');
-    // You can add more functionality here, like processing payment, etc.
   };
 
   const init = () => {
