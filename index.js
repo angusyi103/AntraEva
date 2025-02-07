@@ -28,7 +28,7 @@ const API = (() => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ quantity: newAmount })
+      body: JSON.stringify({ quantity: newAmount }),
     }).then((res) => res.json());
   };
 
@@ -126,7 +126,33 @@ const View = (() => {
     editButton.forEach((button) => {
       button.addEventListener('click', (event) => {
         const itemId = parseInt(event.target.getAttribute('data-id'));
-        handleEdit(itemId);
+        const cartItemElement = document.getElementById(itemId);
+        const itemName = cartItemElement.querySelector('span').textContent.split(' x ')[0];
+        const currentQuantity = parseInt(cartItemElement.querySelector('span').textContent.split(' x ')[1]);
+
+        cartItemElement.innerHTML = `
+          <span>${itemName}</span>
+          <button class="item__subtract-btn" data-id="${itemId}" id="cart-sub">-</button>
+          <span class="quantity__amount">${currentQuantity}</span>
+          <button class="item__add-btn" data-id="${itemId}" id="cart-add"> + </button>
+          <button class="item__save-btn" data-id="${itemId}">save</button>
+        `;
+
+        cartItemElement.querySelector('#cart-add').addEventListener('click', () => {
+          const quantityElement = cartItemElement.querySelector('.quantity__amount');
+          quantityElement.textContent = parseInt(quantityElement.textContent) + 1;
+        });
+
+        cartItemElement.querySelector('#cart-sub').addEventListener('click', () => {
+          const quantityElement = cartItemElement.querySelector('.quantity__amount');
+          let newQuantity = Math.max(0, parseInt(quantityElement.textContent) - 1);
+          quantityElement.textContent = newQuantity;
+        });
+
+        cartItemElement.querySelector('.item__save-btn').addEventListener('click', () => {
+          const newAmount = parseInt(cartItemElement.querySelector('.quantity__amount').textContent);
+          handleEditAmount(itemId, newAmount);
+        });
       });
     });
   };
@@ -137,7 +163,7 @@ const View = (() => {
     items.forEach((item) => {
       const invItem = `<li id=${item.id}>
               <span>${item.content}</span>
-              <button class="item__delete-btn" data-id="${item.id}"> - </button>
+              <button class="item__subtract-btn" data-id="${item.id}"> - </button>
               <span>${item.cnt}</span>
               <button class="item__add-btn" data-id="${item.id}"> + </button>
               <button class="item__add-to-cart-btn" data-id="${item.id}">add to cart</button>
@@ -155,7 +181,7 @@ const View = (() => {
       });
     });
 
-    const subtractButtons = document.querySelectorAll('.item__delete-btn');
+    const subtractButtons = document.querySelectorAll('.item__subtract-btn');
     subtractButtons.forEach((button) => {
       button.addEventListener('click', (event) => {
         const itemId = parseInt(event.target.getAttribute('data-id'));
@@ -205,7 +231,13 @@ const Controller = ((model, view) => {
 
   const handleEdit = () => {};
 
-  const handleEditAmount = () => {};
+  const handleEditAmount = (itemId, newAmount) => {
+    const item = state.cart.find((item) => item.id === itemId);
+    if (item) {
+      item.cnt = Math.max(0, newAmount);
+      state.cart = [...state.cart];
+    }
+  };
 
   const handleDelete = (itemId) => {
     const item = state.cart.find((item) => item.id === itemId);

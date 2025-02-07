@@ -42,7 +42,7 @@
 }
 
 .item__edit-btn {
-    background-color: #007BFF; /* Default color */
+    background-color: #007BFF; 
     color: white;
     border: none;
     border-radius: 4px;
@@ -51,11 +51,11 @@
 }
 
 .item__edit-btn:hover {
-    background-color: #0056b3; /* Hover color */
+    background-color: #0056b3;
 }
 
 .item__add-btn {
-    background-color: #4CAF50;  /* Green color */
+    background-color: #4CAF50; 
     color: white;
     border: none;
     border-radius: 4px;
@@ -64,10 +64,10 @@
 }
 
 .item__add-btn:hover {
-    background-color: #45a049;  /* Slightly darker green on hover */
+    background-color: #45a049; 
 }
 
-.item__delete-btn {
+.item__subtract-btn {
     background-color: #ff4444;  
     color: white;
     border: none;
@@ -76,7 +76,7 @@
     cursor: pointer;
 }
 
-.item__delete-btn:hover {
+.item__subtract-btn:hover {
     background-color: #cc0000;  
 }
 
@@ -98,4 +98,13 @@
     gap: 10px;
     padding-left: 10px;
     padding-right: 10px;
+}
+
+.item__save-btn {
+    background-color: white; 
+    color: black;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
 }
