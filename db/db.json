@@ -5,11 +5,13 @@
   "inventory": [
     {
       "content": "apple",
-      "id": 1
+      "id": 1, 
+      "cnt": 0
     },
     {
       "content": "peach",
-      "id": 2
+      "id": 2,
+      "cnt": 0
     }
   ]
 }
